@@ -1,4 +1,5 @@
 export interface Video {
+  note?: string;
   kind: string;
   etag: string;
   id: {
