@@ -9,11 +9,22 @@ import Sortable from 'sortablejs';
   standalone: true,
   imports: [CommonModule, VideoCardComponent],
   template: `
-    <ul id="videos-list" class="divide-y divide-slate-100">
+    <ul
+      *ngIf="videos.length > 0"
+      id="videos-list"
+      class="divide-y divide-slate-100"
+    >
       <li *ngFor="let video of videos">
         <app-video-card [video]="video"></app-video-card>
       </li>
     </ul>
+
+    <div
+      *ngIf="videos.length === 0"
+      class="w-full text-center text-sm mt-10 text-slate-400"
+    >
+      There are some good channels out there . Look for them !
+    </div>
   `,
 })
 export class VideosListComponent implements AfterViewInit {

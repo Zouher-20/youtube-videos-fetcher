@@ -30,13 +30,13 @@ export class VideosState {
     try {
       const response = await fetch(`${this.url(action.payload.channelId)}`);
       data = await response.json();
-    } catch (error) {
-      console.log('There was an error', error);
-    }
-
-    if (data) {
+      if (data.error) throw new Error('fetch error');
       store.patchState(data);
       localStorage.setItem('videos', JSON.stringify(data.items));
+    } catch (error) {
+      console.log('There was an error', error);
+      store.patchState({ items: [] });
+      localStorage.setItem('videos', JSON.stringify([]));
     }
   }
 
